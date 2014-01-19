@@ -1,0 +1,14 @@
+{
+    "id": "nodebb-plugin-linkcheck",
+    "name": "Link Check",
+    "description": "A Plugin that checks if links are still alive",
+    "url": "https://github.com/barisusakli/nodebb-plugin-linkcheck",
+    "library": "./index.js",
+    "staticDir": "./static",
+    "css": [
+        "style.css"
+    ],
+    "hooks": [
+        { "hook": "filter:scripts.get", "method": "addScripts", "callbacked": false }
+    ]
+}
