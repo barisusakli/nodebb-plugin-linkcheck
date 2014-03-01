@@ -12,5 +12,6 @@
     ],
     "hooks": [
         { "hook": "filter:scripts.get", "method": "addScripts", "callbacked": false }
-    ]
+    ],
+    "minver": "0.4.0"
 }
