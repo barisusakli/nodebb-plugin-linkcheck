@@ -32,7 +32,7 @@ var request = require('request'),
 
 	module.addScripts = function(scripts, callback) {
 		return scripts.concat([
-			'plugins/nodebb-plugin-linkcheck/main.js'
+			'plugins/nodebb-plugin-linkcheck/linkcheck/main.js'
 		]);
 	};
 
