@@ -4,14 +4,11 @@
     "description": "A Plugin that checks if links are still alive",
     "url": "https://github.com/barisusakli/nodebb-plugin-linkcheck",
     "library": "./index.js",
-    "staticDirs": {
-        "linkcheck": "static"
-    },
+    "scripts": [
+        "./static/main.js"
+    ],
     "less": [
         "./static/style.less"
-    ],
-    "hooks": [
-        { "hook": "filter:scripts.get", "method": "addScripts", "callbacked": false }
     ],
     "minver": "0.4.0"
 }

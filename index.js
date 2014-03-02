@@ -15,6 +15,8 @@ var request = require('request'),
 			return callback(null, cache[link].state);
 		}
 
+		if (link.slice(0, 2) === '//') link = 'http:' + link;
+
 		request({url:link, method:'HEAD'}, function (error, response, body) {
 			var state = !error && response.statusCode == 200;
 
@@ -29,12 +31,6 @@ var request = require('request'),
 			state: state
 		};
 	}
-
-	module.addScripts = function(scripts, callback) {
-		return scripts.concat([
-			'plugins/nodebb-plugin-linkcheck/linkcheck/main.js'
-		]);
-	};
 
 
 }(module.exports));
