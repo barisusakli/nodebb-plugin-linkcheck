@@ -1,41 +1,33 @@
-
+'use strict';
 
 var request = require('request'),
 	socketTopics = module.parent.require('./socket.io/topics');
 
-(function(module) {
-	"use strict";
-	var ttl = 60000;
-	var cache = {};
 
-	socketTopics.checkLink = function(socket, link, callback) {
-		var now = Date.now();
+var ttl = 60000;
+var cache = {};
 
-		if(cache[link] && now < cache[link].expireAt) {
-			return callback(null, cache[link].state);
-		}
+socketTopics.checkLink = function(socket, link, callback) {
+	var now = Date.now();
 
-		request({url:link, method:'HEAD'}, function (error, response, body) {
-			var state = !error && response.statusCode == 200;
-
-			setCache(link, now, state);
-			callback(null, state);
-		});
+	if(cache[link] && now < cache[link].expireAt) {
+		return callback(null, cache[link].state);
 	}
 
-	function setCache(link, now, state) {
-		cache[link] = {
-			expireAt: now + ttl,
-			state: state
-		};
-	}
+	request({url:link, method:'HEAD'}, function (error, response) {
+		var state = !error && response.statusCode == 200;
 
-	module.addScripts = function(scripts, callback) {
-		return scripts.concat([
-			'plugins/nodebb-plugin-linkcheck/linkcheck/main.js'
-		]);
+		setCache(link, now, state);
+		callback(null, state);
+	});
+};
+
+function setCache(link, now, state) {
+	cache[link] = {
+		expireAt: now + ttl,
+		state: state
 	};
+}
 
 
-}(module.exports));
 
