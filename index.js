@@ -7,8 +7,13 @@ var request = require('request'),
 var ttl = 60000;
 var cache = {};
 
+
 socketTopics.checkLink = function(socket, link, callback) {
 	var now = Date.now();
+
+	if (link.slice(0, 2) === '//') {
+		link = 'http:' + link;
+	}
 
 	if(cache[link] && now < cache[link].expireAt) {
 		return callback(null, cache[link].state);
@@ -21,6 +26,7 @@ socketTopics.checkLink = function(socket, link, callback) {
 		callback(null, state);
 	});
 };
+
 
 function setCache(link, now, state) {
 	cache[link] = {
