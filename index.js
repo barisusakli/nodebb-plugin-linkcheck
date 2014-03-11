@@ -1,6 +1,7 @@
 'use strict';
 
 var request = require('request'),
+	nconf = module.parent.require('nconf'),
 	socketTopics = module.parent.require('./socket.io/topics');
 
 
@@ -13,6 +14,10 @@ socketTopics.checkLink = function(socket, link, callback) {
 
 	if (link.slice(0, 2) === '//') {
 		link = 'http:' + link;
+	}
+
+	if (link[0] === '/') {
+		link = nconf.get('url') + link;
 	}
 
 	if(cache[link] && now < cache[link].expireAt) {
