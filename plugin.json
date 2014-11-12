@@ -9,6 +9,5 @@
     ],
     "scripts" :[
         "./static/main.js"
-    ],
-    "minver": "0.4.0"
+    ]
 }

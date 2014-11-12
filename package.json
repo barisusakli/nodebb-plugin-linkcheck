@@ -15,5 +15,8 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "request": "^2.34.0"
+  },
+  "nbbpm": {
+    "compatibility": "^0.5.0"
   }
 }
