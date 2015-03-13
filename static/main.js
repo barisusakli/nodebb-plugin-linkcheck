@@ -5,9 +5,9 @@
 (function() {
 	"use strict";
 
-	$(document).bind('DOMNodeInserted', function(event) {
+	$(window).on('action:posts.loaded, action:topic.loaded', function(event) {
 
-		if(!$('.topic').length || $(event.target).hasClass('linkcheck-plugin')) {
+		if (!$('.topic').length) {
 			return;
  		}
 
@@ -18,11 +18,11 @@
 		$('.post-content a').each(function(index, element) {
 
 			var link = $(element);
-			if(link.attr('class') || link.attr('done')) {
+			if(link.attr('class') || link.attr('link-checked')) {
 				return;
 			}
 
-			link.attr('done', 1);
+			link.attr('link-checked', 1);
 
 			socket.emit('topics.checkLink', link.attr('href'), function(err, result) {
 				if(!result) {
