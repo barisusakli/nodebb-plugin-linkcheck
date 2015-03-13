@@ -24,7 +24,7 @@
 
 			link.attr('link-checked', 1);
 
-			socket.emit('topics.checkLink', link.attr('href'), function(err, result) {
+			socket.emit('plugins.linkCheck.checkLink', link.attr('href'), function(err, result) {
 				if(!result) {
 					$('<i class="fa fa-chain-broken linkcheck-plugin"></i>').insertBefore(link);
 				}

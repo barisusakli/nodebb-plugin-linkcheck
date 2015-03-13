@@ -2,15 +2,15 @@
 
 var request = require('request'),
 	nconf = module.parent.require('nconf'),
-	socketTopics = module.parent.require('./socket.io/topics');
+	socketPlugins = module.parent.require('./socket.io/plugins');
 
 
 var ttl = 60000;
 var cache = {};
 
+socketPlugins.linkCheck = {}
 
-socketTopics.checkLink = function(socket, link, callback) {
-	var now = Date.now();
+socketPlugins.linkCheck.checkLink = function(socket, link, callback) {
 
 	if (link.slice(0, 2) === '//') {
 		link = 'http:' + link;
@@ -20,11 +20,13 @@ socketTopics.checkLink = function(socket, link, callback) {
 		link = nconf.get('url') + link;
 	}
 
-	if(cache[link] && now < cache[link].expireAt) {
+	var now = Date.now();
+
+	if (cache[link] && now < cache[link].expireAt) {
 		return callback(null, cache[link].state);
 	}
 
-	request({url:link, method:'HEAD'}, function (error, response) {
+	request({url:link, method:'HEAD', timeout: 5000}, function (error, response) {
 		var state = !error && response.statusCode == 200;
 
 		setCache(link, now, state);

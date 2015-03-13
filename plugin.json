@@ -1,13 +1,12 @@
 {
-    "id": "nodebb-plugin-linkcheck",
-    "name": "Link Check",
-    "description": "A Plugin that checks if links are still alive",
-    "url": "https://github.com/barisusakli/nodebb-plugin-linkcheck",
     "library": "./index.js",
     "less": [
         "./static/style.less"
     ],
     "scripts" :[
         "./static/main.js"
-    ]
+    ],
+    "nbbpm": {
+        "compatibility": "^0.6.0"
+    }
 }
