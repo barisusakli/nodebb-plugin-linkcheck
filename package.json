@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-linkcheck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Plugin to check if links are still alive",
   "main": "index.js",
   "scripts": {
