@@ -1,12 +1,8 @@
-
-
-
-
 (function() {
 	"use strict";
 
 	$(window).on('action:posts.loaded, action:topic.loaded', function(event) {
-
+		
 		if (!$('.topic').length) {
 			return;
  		}
@@ -15,7 +11,7 @@
 	});
 
 	function verifyLinks() {
-		$('.post-content a').each(function(index, element) {
+		$('.posts .content a').each(function(index, element) {
 
 			var link = $(element);
 			if(link.attr('class') || link.attr('link-checked')) {
