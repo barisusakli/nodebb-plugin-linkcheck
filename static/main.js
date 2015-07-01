@@ -15,7 +15,7 @@
 	});
 
 	function verifyLinks() {
-		$('.post-content a').each(function(index, element) {
+		$('[component="post/content"] a').each(function(index, element) {
 
 			var link = $(element);
 			if(link.attr('class') || link.attr('link-checked')) {
